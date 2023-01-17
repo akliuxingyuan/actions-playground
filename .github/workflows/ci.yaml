@@ -16,7 +16,7 @@ jobs:
 
       - name: Generate file
         run: |
-          cd $GITHUB_WORKSPACE/dir1
+          cd ${{ github.workspace }}/dir1
           echo pwd=${{ github.workspace }}
           echo "hello world" > hello.txt
           echo "message=update: $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
