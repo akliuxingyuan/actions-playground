@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  makepkg:
+    name: "Build on Arch Linux"
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Generate file
+        run: |
+          cd $GITHUB_WORKSPACE/dir1
+          echo pwd=${{ github.workspace }}
+          echo "hello world" > hello.txt
+          echo "message=update: $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: |
+            ${{ github.workspace }}/dir1/*.txt
+          name: ${{ env.title }}
+          token: ${{ secrets.GITHUB_TOKEN }}
