@@ -10,6 +10,8 @@ jobs:
     name: "Build on Arch Linux"
     runs-on: ubuntu-latest
     container: archlinux:base-devel
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -17,10 +19,15 @@ jobs:
       - name: Generate file
         run: |
           echo $(pwd)
+
+          echo 'github.workspace === ${{ github.workspace }}'
+          echo "GITHUB_WORKSPACE === $GITHUB_WORKSPACE"
+          echo 'runner.workspace === ${{ runner.workspace }}'
+          echo "RUNNER_WORKSPACE === $RUNNER_WORKSPACE"
+
           cd $GITHUB_WORKSPACE/dir1
-          echo pwd=$GITHUB_WORKSPACE
           echo "hello world" > hello.txt
-          echo "message=update: $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+          echo "title=update: $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
       - name: Create Release
         uses: ncipollo/release-action@v1
