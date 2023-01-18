@@ -33,6 +33,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: |
-            ${{ github.workspace }}/dir1/*.txt
+            dir1/*.txt
+            dir2/*.txt
           name: ${{ env.title }}
           token: ${{ secrets.GITHUB_TOKEN }}
