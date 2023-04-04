@@ -7,7 +7,7 @@ on:
       - master
     tags:
       - "*"
-    create:
+  create:
 
 jobs:
   print_event_info:
@@ -21,7 +21,6 @@ jobs:
         run: |
           echo github.ref=${{ github.ref }}
           echo github.event_name=${{ github.event_name }}
-          echo github.event=${{ github.event }}
           echo github.event=${{ github.event }}
           echo github.event.name=${{ github.event.name }}
           echo github.event.ref=${{ github.event.ref }}
