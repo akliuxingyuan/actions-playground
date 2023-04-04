@@ -1,0 +1,32 @@
+name: trigger
+
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "*"
+
+jobs:
+  print_event_info:
+    name: trigger
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Print
+        run: |
+          echo github.event.ref_type=${{ github.event.ref_type }}
+          echo github.event.ref=${{ github.event.ref }}
+
+      - name: if1
+        if: "contains(toJSON(github.event.ref_type), 'tag')"
+        run: |
+          echo "if1"
+
+      - name: if2
+        if: ${{ github.event.ref_type }} == 'tag'
+        run: |
+          echo "if2"
