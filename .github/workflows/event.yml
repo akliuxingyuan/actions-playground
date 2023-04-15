@@ -37,3 +37,7 @@ jobs:
         if: ${{ github.event.ref_type }} == 'tag'
         run: |
           echo "if2"
+      
+      - name: Print
+        run: |
+          echo ${event_name}
