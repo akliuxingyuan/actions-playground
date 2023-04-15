@@ -26,7 +26,8 @@ jobs:
           echo github.event.ref=${{ github.event.ref }}
           echo github.event.ref_type=${{ github.event.ref_type }}
           event_name=${{ github.event_name }}
-          echo ${event_name^}
+          echo event_name${event_name^}
+          echo "event_name=$(event_name^)" >> $GITHUB_ENV
 
       - name: if1
         if: "contains(toJSON(github.event.ref_type), 'tag')"
@@ -40,4 +41,4 @@ jobs:
       
       - name: Print
         run: |
-          echo ${event_name}
+          echo ${{ env.event_name }}
