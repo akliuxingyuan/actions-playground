@@ -42,3 +42,9 @@ jobs:
       - name: Print
         run: |
           echo ${{ env.event_name }}
+      - name: Dump github context
+        run: echo "$GITHUB_CONTEXT"
+        shell: bash
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+
