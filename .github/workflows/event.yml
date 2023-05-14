@@ -49,6 +49,8 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
 
+      - run: echo helloword > dir1/helloworld.txt
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
