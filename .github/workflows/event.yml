@@ -38,13 +38,20 @@ jobs:
         if: ${{ github.event.ref_type }} == 'tag'
         run: |
           echo "if2"
-      
+
       - name: Print
         run: |
           echo ${{ env.event_name }}
+
       - name: Dump github context
         run: echo "$GITHUB_CONTEXT"
         shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: dir1/*.txt
 
